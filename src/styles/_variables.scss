@@ -11,10 +11,47 @@ $black-900: #3d3d3d;
 $black-950: #000000;
 
 $background-dark: $black-950;
+$border-dark: $black-600;
 
 $font-light: $black-100;
 $font-medium: $black-200;
 $font-muted: $black-400;
 $font-default: $black-50;
 
+$content-width: 1200px;
 $height-header: 60px;
+
+$breakpoint-xs: 576px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: $content-width;
+
+@mixin media-xs {
+  @media (max-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}

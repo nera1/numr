@@ -1,10 +1,23 @@
 @use "../variables";
 
 .header {
-  background-color: darkblue;
+  background-color: variables.$background-dark;
   height: variables.$height-header;
   width: 100%;
   position: fixed;
   left: 0;
   top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  border-bottom: 0.5px solid variables.$border-dark;
+  display: flex;
+  justify-content: center;
+  & > .container {
+    width: variables.$content-width;
+    background-color: darkblue;
+  }
+
+  @include variables.media-xs {
+    
+  }
 }
