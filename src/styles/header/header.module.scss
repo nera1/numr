@@ -12,12 +12,28 @@
   border-bottom: 0.5px solid variables.$border-dark;
   display: flex;
   justify-content: center;
+
   & > .container {
     width: variables.$content-width;
-    background-color: darkblue;
+    box-sizing: border-box;
+    border: 0.5px solid red;
+    display: flex;
+    & > * {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    & > .left,
+    & > .right {
+      flex-grow: 1;
+    }
+    & > .right {
+      gap: 8px;
+      justify-content: flex-end;
+    }
   }
 
   @include variables.media-xs {
-    
   }
 }
