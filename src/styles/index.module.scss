@@ -1,4 +1,54 @@
 @use "variables";
 
 .index {
+  background-color: darkblue;
+  display: flex;
+  justify-content: center;
+  & > .container {
+    width: variables.$width-content;
+    background-color: darkcyan;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: variables.$gap-vertical-main-container;
+    padding-bottom: variables.$gap-vertical-main-container;
+
+    & > .options-container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+@include variables.media-xs {
+  .container {
+    padding-left: variables.$padding-aside-main-container;
+    padding-right: variables.$padding-aside-main-container;
+  }
+}
+
+@include variables.media-sm {
+  .container {
+    padding-left: variables.$padding-aside-main-container;
+    padding-right: variables.$padding-aside-main-container;
+  }
+}
+
+@include variables.media-md {
+  .container {
+    padding-left: variables.$padding-aside-main-container;
+    padding-right: variables.$padding-aside-main-container;
+  }
+}
+
+@include variables.media-lg {
+  .container {
+    padding-left: variables.$padding-aside-main-container;
+    padding-right: variables.$padding-aside-main-container;
+  }
+}
+
+@include variables.media-xl {
+  .container {
+    padding: 0 0;
+  }
 }

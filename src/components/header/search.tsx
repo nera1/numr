@@ -6,7 +6,7 @@ import { Search as SearchIcon } from "lucide-react";
 
 const Search: FunctionComponent<any> = () => {
   return (
-    <div className="px-2 flex items-center border border-input rounded-md p-1 bg-background h-9">
+    <div className="px-3 flex items-center border border-input rounded-md p-1 bg-background h-9">
       <SearchIcon size={16} />
       <Input
         type="text"
