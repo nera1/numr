@@ -14,9 +14,8 @@
   justify-content: center;
 
   & > .container {
-    width: variables.$content-width;
+    width: variables.$width-content;
     box-sizing: border-box;
-    border: 0.5px solid red;
     display: flex;
     & > * {
       display: flex;
@@ -28,6 +27,12 @@
     & > .right {
       flex-grow: 1;
     }
+    & > .left {
+      justify-content: flex-start;
+      & * {
+        fill: #fff;
+      }
+    }
     & > .right {
       gap: 8px;
       justify-content: flex-end;
@@ -35,5 +40,29 @@
   }
 
   @include variables.media-xs {
+    .container {
+      padding: 0 variables.$padding-aside-header-container;
+    }
+  }
+
+  @include variables.media-sm {
+    .container {
+      padding: 0 variables.$padding-aside-header-container;
+    }
+  }
+
+  @include variables.media-md {
+    .container {
+      padding: 0 variables.$padding-aside-header-container;
+    }
+  }
+
+  @include variables.media-lg {
+    .container {
+      padding: 0 variables.$padding-aside-header-container;
+    }
+  }
+
+  @include variables.media-xl {
   }
 }
