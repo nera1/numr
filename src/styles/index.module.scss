@@ -1,20 +1,29 @@
 @use "variables";
 
 .index {
-  background-color: darkblue;
   display: flex;
   justify-content: center;
   & > .container {
     width: variables.$width-content;
-    background-color: darkcyan;
     min-height: 100vh;
     box-sizing: border-box;
     padding-top: variables.$gap-vertical-main-container;
     padding-bottom: variables.$gap-vertical-main-container;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$gap-vertical-main-container;
 
     & > .options-container {
       display: flex;
       justify-content: space-between;
+    }
+
+    & > .post-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      background-color: darkblue;
+      height: 180px;
     }
   }
 }

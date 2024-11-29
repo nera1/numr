@@ -93,7 +93,7 @@ const CategorySelect: FunctionComponent<any> = () => {
         >
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select category..."}
+            : "카테고리"}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
