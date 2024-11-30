@@ -10,7 +10,7 @@ const Search: FunctionComponent<any> = () => {
       <SearchIcon size={16} />
       <Input
         type="text"
-        className="border-none bg-transparent focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground"
+        className="border-none bg-transparent focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground w-28"
       />
     </div>
   );

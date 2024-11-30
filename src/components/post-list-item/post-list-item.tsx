@@ -14,14 +14,17 @@ import styles from "@/styles/post-list-item/post-list-item.module.scss";
 
 const PostListItem: FunctionComponent = () => {
   return (
-    <li>
-      <AspectRatio ratio={16 / 9}>
+    <li className={styles["post-list-item"]}>
+      <AspectRatio ratio={16 / 9} className={styles["aspect"]}>
         <img
           src="https://picsum.photos/seed/picsum/1600/900"
-          alt="Example"
-          className="w-full h-full object-cover rounded-t-lg"
+          alt="preview"
+          className="object-cover rounded"
         />
       </AspectRatio>
+      <div className="text-lg font-semibold">
+        Are you absolutely sure? HERE WE GOOOOOO
+      </div>
     </li>
   );
 };

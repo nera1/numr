@@ -38,31 +38,31 @@
       justify-content: flex-end;
     }
   }
+}
 
-  @include variables.media-xs {
-    .container {
-      padding: 0 variables.$padding-aside-header-container;
-    }
+@include variables.media-xs {
+  .container {
+    padding: 0 variables.$padding-aside-header-container;
   }
+}
 
-  @include variables.media-sm {
-    .container {
-      padding: 0 variables.$padding-aside-header-container;
-    }
+@include variables.media-sm {
+  .container {
+    padding: 0 variables.$padding-aside-header-container;
   }
+}
 
-  @include variables.media-md {
-    .container {
-      padding: 0 variables.$padding-aside-header-container;
-    }
+@include variables.media-md {
+  .container {
+    padding: 0 variables.$padding-aside-header-container;
   }
+}
 
-  @include variables.media-lg {
-    .container {
-      padding: 0 variables.$padding-aside-header-container;
-    }
+@include variables.media-lg {
+  .container {
+    padding: 0 variables.$padding-aside-header-container;
   }
+}
 
-  @include variables.media-xl {
-  }
+@include variables.media-xl {
 }

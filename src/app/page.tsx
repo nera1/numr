@@ -3,8 +3,9 @@ import Header from "@/components/header/header";
 import CategorySelect from "@/components/category-select/category-select";
 import OrderSelect from "@/components/order-select/order-select";
 
-import styles from "@/styles/index.module.scss";
 import PostListItem from "@/components/post-list-item/post-list-item";
+
+import styles from "@/styles/index.module.scss";
 
 export default function Home() {
   return (
@@ -17,6 +18,19 @@ export default function Home() {
             <OrderSelect />
           </div>
           <ul className={styles["post-list"]}>
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
+            <PostListItem />
             <PostListItem />
           </ul>
         </div>

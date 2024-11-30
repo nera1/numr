@@ -41,8 +41,8 @@ function SelectIcon(value: String) {
 
 const OrderSelect: FunctionComponent = () => {
   const orders = [
-    { value: "desc", label: "최신 순" },
-    { value: "asc", label: "오래된 순" },
+    { value: "desc", label: "Latest" },
+    { value: "asc", label: "Oldest" },
   ];
 
   const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ const OrderSelect: FunctionComponent = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[150px] justify-between"
+          className="w-28 justify-between"
         >
           {value
             ? orders.find((order) => order.value === value)?.label
@@ -63,7 +63,7 @@ const OrderSelect: FunctionComponent = () => {
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[150px] p-0">
+      <PopoverContent className="w-28 p-0">
         <Command>
           <CommandList>
             <CommandGroup>

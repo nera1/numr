@@ -1,5 +1,45 @@
-@use "variables";
+@use "../variables";
 
 .post-list-item {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$gap-post-list-item;
+  & > .aspect {
+    & > img {
+      display: block;
+    }
+  }
+}
+
+@include variables.media-xs {
+  .post-list-item {
+    flex: 0 0 100%;
+  }
+}
+
+@include variables.media-sm {
+  .post-list-item {
+    flex: 0 0 calc((100% - variables.$gap-post-list) / 2);
+  }
+}
+
+@include variables.media-md {
+  .post-list-item {
+    flex: 0 0 calc((100% - variables.$gap-post-list) / 2);
+  }
+}
+
+@include variables.media-lg {
+  .post-list-item {
+    flex: 0 0 calc((100% - 2 * variables.$gap-post-list) / 3);
+  }
+}
+
+@include variables.media-xl {
+  .post-list-item {
+    flex: 0 0 calc((100% - 2 * variables.$gap-post-list) / 3);
+  }
 }
