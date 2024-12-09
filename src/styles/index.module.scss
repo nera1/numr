@@ -8,7 +8,7 @@
     min-height: 100vh;
     box-sizing: border-box;
     padding-top: variables.$gap-vertical-main-container;
-    padding-bottom: variables.$gap-vertical-main-container;
+    padding-bottom: variables.$padding-bottom-main-container;
     display: flex;
     flex-direction: column;
     gap: variables.$gap-vertical-main-container;
@@ -23,9 +23,12 @@
       padding: 0;
       margin: 0;
       list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: variables.$gap-post-list;
+      & .infinite {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: variables.$gap-post-list;
+      }
     }
   }
 }
@@ -41,6 +44,9 @@
   .container {
     padding-left: variables.$padding-aside-main-container;
     padding-right: variables.$padding-aside-main-container;
+  }
+  .post-list {
+    justify-content: center;
   }
 }
 

@@ -1,0 +1,5 @@
+@use "../variables";
+
+.post-navigator {
+  max-width: calc((100% - variables.$gap-post-navigator-container) / 2);
+}

@@ -20,22 +20,25 @@ $font-muted: $black-400;
 $font-default: $black-50;
 
 // Layout Variables
-$width-content: 1024px;
+$width-content: 840px;
 
 $padding-aside-main-container: 16px;
 $padding-aside-header-container: 16px;
+$padding-bottom-main-container: 128px;
 
-$gap-vertical-main-container: 16px;
-$gap-post-list: 16px;
-$gap-post-list-item: 5px;
+$margin-bottom-post-list-item: 16px;
+
+$gap-vertical-main-container: 12px;
+$gap-post-list: 18px;
+$gap-post-list-item: 8px;
+$gap-post-navigator-container: 8px;
 
 $height-header: 60px;
 
-// Breakpoint Variables
-$breakpoint-xs: 540px; // 기존보다 36px 줄임
-$breakpoint-sm: 720px; // 기존보다 48px 줄임
-$breakpoint-md: 960px; // 기존보다 32px 줄임
-$breakpoint-lg: $width-content; // 기존보다 176px 줄임 (1200px에서 감소)
+$breakpoint-xs: 540px;
+$breakpoint-sm: 720px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1024px;
 
 $breakpoint-xs-end: $breakpoint-xs;
 $breakpoint-sm-start: $breakpoint-xs + 1;
