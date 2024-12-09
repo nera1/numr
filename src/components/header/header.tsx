@@ -1,15 +1,13 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
-import { Github } from "lucide-react";
 
 import Search from "./search";
 import Logo from "../svg/logo";
+import HeaderMenu from "./header-menu";
 
 import styles from "@/styles/header/header.module.scss";
 
-const Header: FunctionComponent<any> = () => {
+const Header: FunctionComponent = () => {
   return (
     <header className={styles["header"]}>
       <div className={styles["container"]}>
@@ -21,9 +19,7 @@ const Header: FunctionComponent<any> = () => {
         <div className={styles["center"]}></div>
         <div className={styles["right"]}>
           <Search />
-          <Button variant="outline" size="icon">
-            <Github />
-          </Button>
+          <HeaderMenu />
         </div>
       </div>
     </header>

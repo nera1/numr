@@ -1,6 +1,7 @@
 "use client";
 
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -15,9 +16,7 @@ import {
 
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
@@ -28,11 +27,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-function SelectIcon(value: String) {
+function SelectIcon(value: string) {
   switch (value) {
-    case "desc":
+    case "latest":
       return <ClockArrowDown />;
-    case "asc":
+    case "oldest":
       return <ClockArrowUp />;
     default:
       return <ArrowUpDown />;
@@ -41,12 +40,27 @@ function SelectIcon(value: String) {
 
 const OrderSelect: FunctionComponent = () => {
   const orders = [
-    { value: "desc", label: "Latest" },
-    { value: "asc", label: "Oldest" },
+    { value: "latest", label: "Latest" },
+    { value: "oldest", label: "Oldest" },
   ];
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(orders[0].value);
+
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams.entries());
+    let updatedQueryString = "";
+    if (!value) {
+      updatedQueryString = new URLSearchParams(params).toString();
+    } else {
+      const newQueryString = { ...params, order: value };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    }
+    router.push(`?${updatedQueryString}`);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -94,4 +108,10 @@ const OrderSelect: FunctionComponent = () => {
   );
 };
 
-export default OrderSelect;
+export default function Page() {
+  return (
+    <Suspense fallback={<div></div>}>
+      <OrderSelect />
+    </Suspense>
+  );
+}
