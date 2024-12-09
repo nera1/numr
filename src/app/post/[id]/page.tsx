@@ -24,6 +24,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 
 import PostNavigator from "./post-navigator";
+import ScrollTop from "./scroll-top";
 
 import GetCode from "@/plugins/get-code";
 import AddCopyButton from "@/plugins/add-copy-button";
@@ -37,6 +38,7 @@ import { Database, Markdown } from "@/types";
 import { restoreImg } from "@/util/restore-img";
 
 import styles from "@/styles/post/post.module.scss";
+import remarkAddEmptyTitle from "@/plugins/rehype-codeblock-with-figure";
 
 const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -59,6 +61,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
 
   let { value } = await remark()
     .use(remarkGfm)
+    .use(remarkAddEmptyTitle)
     .use(remarkRehype)
     .use(GetCode)
     .use(rehypePrettyCode)
@@ -108,7 +111,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
       {(prevId >= 0 || nextId < db.titles.length) && (
         <p className="text-lg font-semibold py-2">Recent Post</p>
       )}
-      <div className="flex space-x-2 justify-between">
+      <div className={`flex space-x-2 ${styles["navigator-container"]}`}>
         {prevId >= 0 && (
           <PostNavigator
             id={String(prevId)}
@@ -124,6 +127,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
           />
         )}
       </div>
+      <ScrollTop />
       <ButtonWithToast />
     </>
   );

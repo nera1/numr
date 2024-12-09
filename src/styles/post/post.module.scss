@@ -1146,3 +1146,33 @@
     }
   }
 }
+
+@include variables.media-xs {
+  .navigator-container {
+    flex-direction: column;
+  }
+}
+
+@include variables.media-sm {
+  .navigator-container {
+    flex-direction: column;
+  }
+}
+
+@include variables.media-md {
+  .navigator-container {
+    justify-content: space-between;
+  }
+}
+
+@include variables.media-lg {
+  .navigator-container {
+    justify-content: space-between;
+  }
+}
+
+@include variables.media-xl {
+  .navigator-container {
+    justify-content: space-between;
+  }
+}

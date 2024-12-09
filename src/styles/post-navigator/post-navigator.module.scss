@@ -1,5 +1,46 @@
 @use "../variables";
 
 .post-navigator {
-  max-width: calc((100% - variables.$gap-post-navigator-container) / 2);
 }
+
+@include variables.media-xs {
+  .post-navigator {
+    &.prev {
+      text-align: right;
+    }
+  }
+}
+
+@include variables.media-sm {
+  .post-navigator {
+    &.prev {
+      text-align: right;
+    }
+  }
+}
+
+@include variables.media-md {
+  .post-navigator {
+    &.next {
+      text-align: right;
+    }
+  }
+}
+
+@include variables.media-lg {
+  .post-navigator {
+    &.next {
+      text-align: right;
+    }
+  }
+}
+
+@include variables.media-xl {
+  .post-navigator {
+    &.next {
+      text-align: right;
+    }
+  }
+}
+
+//width: calc((100% - variables.$gap-post-navigator-container) / 2);

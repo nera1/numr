@@ -11,8 +11,10 @@ const Search: FunctionComponent = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
-      setInput("");
       router.push(`/?search=${encodeURIComponent(input)}`);
+      setTimeout(() => {
+        setInput("");
+      }, 10);
     }
   };
 
@@ -23,7 +25,8 @@ const Search: FunctionComponent = () => {
         type="text"
         value={input}
         onChange={(event) => {
-          setInput(event.target.value);
+          const { value } = event.target;
+          setInput(value);
         }}
         onKeyDown={handleKeyDown}
         className="border-none bg-transparent focus:ring-0 focus-visible:ring-0 placeholder:text-muted-foreground w-28"
