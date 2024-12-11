@@ -20,12 +20,6 @@ const nextConfig: NextConfig = {
     config.output.chunkLoadTimeout = 60000;
     return config;
   },
-  basePath: "/numr",
-  assetPrefix: "/numr",
-  output: "export",
-  images: {
-    unoptimized: true,
-  },
 };
 
 export default nextConfig;
