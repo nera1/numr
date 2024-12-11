@@ -188,6 +188,7 @@ function Home() {
 
   return (
     <>
+      <title>sumr</title>
       <div className={styles["keyword-container"]}>
         {postListState.tag && (
           <div className="text-2xl font-extrabold tracking-tight py-3">

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import Link from "next/link";
+import { Metadata } from "next";
 
 import { readFileSync } from "fs";
 import { join } from "path";
@@ -49,6 +50,11 @@ export async function generateStaticParams() {
   return ids.map((id) => ({ id }));
 }
 
+export const metadata: Metadata = {
+  title: "Sumr",
+  description: "Sumr",
+};
+
 const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -59,6 +65,8 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   const { dictionary }: { dictionary: { [key: string]: Markdown } } = DB;
 
   const { title, category, created, tags }: Markdown = dictionary[id];
+
+  metadata.title = title;
 
   const yamlPattern = /^---[\s\S]+?---/;
 
@@ -82,6 +90,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <>
+      <title>{title}</title>
       <Breadcrumb className={`${styles["bread"]} mt-4`}>
         <BreadcrumbList>
           <BreadcrumbItem>
