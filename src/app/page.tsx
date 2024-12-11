@@ -17,8 +17,9 @@ import db from "@/data/db.json";
 
 import { debounce } from "@/util";
 
-import styles from "@/styles/index.module.scss";
 import { Markdown } from "@/types";
+
+import styles from "@/styles/index.module.scss";
 
 export type PostState = {
   order?: string | null;
