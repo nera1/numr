@@ -13,7 +13,9 @@ const Search: FunctionComponent = () => {
     if (event.key === "Enter" && input.trim()) {
       const url = `/?search=${encodeURIComponent(input)}`;
       console.log(url);
-      router.push(url);
+      setTimeout(() => {
+        router.push(url);
+      }, 50);
     }
   };
 
