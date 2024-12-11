@@ -5,20 +5,14 @@ import { useSearchParams } from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Spinner } from "@/components/ui/spinner";
-
 import CategorySelect from "@/components/category-select/category-select";
 import OrderSelect from "@/components/order-select/order-select";
-
 import PostListItem from "@/components/post-list-item/post-list-item";
 
 import { PostListItem as PostListItemProps } from "@/types/post-list-item";
-
 import db from "@/data/db.json";
-
 import { debounce } from "@/util";
-
 import { Markdown } from "@/types";
-
 import styles from "@/styles/index.module.scss";
 
 export type PostState = {
@@ -38,20 +32,7 @@ function Home() {
     limit: 6,
     offset: 12,
     category: null,
-    list: [
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-      { title: "", created: "", category: "", preview: null },
-    ],
+    list: [],
     isEnd: false,
   });
 
@@ -63,66 +44,78 @@ function Home() {
     const search = searchParams.get("search");
     const tag = searchParams.get("tag");
 
-    console.log(order, category, search, tag);
-
-    setPostListState((prev) => ({
-      ...prev,
-      order,
-      category,
-      search,
-      tag,
-    }));
+    setPostListState((prev) => {
+      if (
+        prev.order === order &&
+        prev.category === category &&
+        prev.search === search &&
+        prev.tag === tag
+      ) {
+        return prev;
+      }
+      return {
+        ...prev,
+        order,
+        category,
+        search,
+        tag,
+      };
+    });
   }, [searchParams]);
 
   useEffect(() => {
-    setPostListState((prev) => {
-      const { offset, category, order, search, tag } = prev;
+    const { offset, category, order, search, tag } = postListState;
 
-      let filteredPosts = [...db.titles];
-      const dictionary: { [key: string]: Markdown } = db.dictionary;
+    let filteredPosts = [...db.titles];
+    const dictionary: { [key: string]: Markdown } = db.dictionary;
 
-      if (tag) {
-        filteredPosts = filteredPosts.filter((post) =>
-          dictionary[post.id].tags.includes(tag)
-        );
-      } else if (category) {
-        filteredPosts = filteredPosts.filter(
-          (post) => post.category === category
-        );
-      } else if (search) {
-        filteredPosts = filteredPosts.filter((post) =>
-          post.title.toLowerCase().includes(search.toLowerCase())
-        );
-      }
+    if (tag) {
+      filteredPosts = filteredPosts.filter((post) =>
+        dictionary[post.id].tags.includes(tag)
+      );
+    }
+    if (category) {
+      filteredPosts = filteredPosts.filter(
+        (post) => post.category === category
+      );
+    }
+    if (search) {
+      filteredPosts = filteredPosts.filter((post) =>
+        post.title.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
-      let newList = [];
-      switch (order) {
-        case "latest":
-          newList = filteredPosts.reverse().slice(0, offset);
-          break;
-        case "oldest":
-          newList = filteredPosts.slice(0, offset);
-          break;
-        default:
-          newList = filteredPosts.reverse().slice(0, offset);
-          break;
-      }
+    let newList = [];
+    switch (order) {
+      case "latest":
+        newList = filteredPosts.reverse().slice(0, offset);
+        break;
+      case "oldest":
+        newList = filteredPosts.slice(0, offset);
+        break;
+      default:
+        newList = filteredPosts.reverse().slice(0, offset);
+        break;
+    }
 
-      // 초기화된 상태 설정
-      return {
-        ...prev,
-        list: newList,
-        isEnd: newList.length >= filteredPosts.length, // 초기 상태에서 isEnd 계산
-      };
-    });
-  }, [postListState.order, postListState.category, postListState.search]);
+    setPostListState((prev) => ({
+      ...prev,
+      list: newList,
+      isEnd: newList.length >= filteredPosts.length,
+    }));
+  }, [
+    postListState.offset,
+    postListState.category,
+    postListState.order,
+    postListState.search,
+    postListState.tag,
+  ]);
 
   function fetchData() {
     setPostListState((prev) => {
       const { order, limit, list, category, search, tag } = prev;
       const currentListLength = list.length;
 
-      // 데이터 필터링
       let filteredPosts = [...db.titles];
       const dictionary: { [key: string]: Markdown } = db.dictionary;
 
@@ -130,17 +123,18 @@ function Home() {
         filteredPosts = filteredPosts.filter((post) =>
           dictionary[post.id].tags.includes(tag)
         );
-      } else if (category) {
+      }
+      if (category) {
         filteredPosts = filteredPosts.filter(
           (post) => post.category === category
         );
-      } else if (search) {
+      }
+      if (search) {
         filteredPosts = filteredPosts.filter((post) =>
           post.title.toLowerCase().includes(search.toLowerCase())
         );
       }
 
-      // 데이터 추가
       let newPosts = [];
       switch (order) {
         case "latest":
@@ -163,7 +157,6 @@ function Home() {
 
       const newList = [...list, ...newPosts];
 
-      // 상태 업데이트
       return {
         ...prev,
         list: newList,
@@ -172,9 +165,7 @@ function Home() {
     });
   }
 
-  const debouncer = debounce(() => {
-    fetchData();
-  }, 550);
+  const debouncer = debounce(fetchData, 550);
 
   function next() {
     debouncer();
