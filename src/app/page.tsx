@@ -36,7 +36,7 @@ function Home() {
     isEnd: false,
   });
 
-  const searchParams = useSearchParams();
+  //const searchParams = useSearchParams();
 
   // useEffect(() => {
   //   const order = searchParams.get("order");
