@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, Suspense, useState } from "react";
+import { FunctionComponent, Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Search as SearchIcon } from "lucide-react";
@@ -9,9 +9,13 @@ const Search: FunctionComponent = () => {
   const [input, setInput] = useState<string>("");
   const router = useRouter();
 
+  useEffect(() => {
+    console.log("HERE");
+  }, []);
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
-      const url = `./?search=${encodeURIComponent(input)}`;
+      const url = `/?search=${encodeURIComponent(input)}`;
       router.push(url);
       setTimeout(() => {
         setInput("");
