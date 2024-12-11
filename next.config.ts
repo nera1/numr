@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
-  generateEtags: false, // gpt에서 시킴
+  generateEtags: false,
   headers: async () => [
     {
       source: "/_next/:path*",
@@ -16,11 +15,17 @@ const nextConfig: NextConfig = {
         },
       ],
     },
-  ], // gpt에서 시킴
+  ],
   webpack: (config) => {
-    config.output.chunkLoadTimeout = 60000; // 타임아웃을 60초로 설정
+    config.output.chunkLoadTimeout = 60000;
     return config;
-  }, // gpt에서 시킴
+  },
+  basePath: "/numr",
+  assetPrefix: "/numr",
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
