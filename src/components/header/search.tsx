@@ -11,7 +11,8 @@ const Search: FunctionComponent = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
-      router.push(`/?search=${encodeURIComponent(input)}`);
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+      router.push(`${basePath}/?search=${encodeURIComponent(input)}`);
       setTimeout(() => {
         setInput("");
       }, 10);
