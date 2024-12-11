@@ -56,7 +56,7 @@ const CategorySelect: FunctionComponent = () => {
       const newQueryString = { order: params.order, category: value };
       updatedQueryString = new URLSearchParams(newQueryString).toString();
     }
-    router.push(`?${updatedQueryString}`);
+    router.push(`./?${updatedQueryString}`);
   }, [value]);
 
   return (

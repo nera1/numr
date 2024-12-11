@@ -30,7 +30,7 @@ const PostListItem: FunctionComponent<PostListItemProps> = ({
     <li
       className={styles["post-list-item"]}
       onClick={() => {
-        router.push(`/post/${id}`);
+        router.push(`./post/${id}`);
       }}
     >
       <AspectRatio ratio={16 / 9} className={`${styles["aspect"]} rounded`}>
