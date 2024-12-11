@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 
+import Link from "next/link";
+
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -21,7 +23,7 @@ import {
 import ButtonWithToast from "@/components/button-with-toast/ButtonWithToast";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
+import { badgeVariants } from "@/components/ui/badge";
 
 import PostNavigator from "./post-navigator";
 import ScrollTop from "./scroll-top";
@@ -35,10 +37,23 @@ import { dateString } from "@/util";
 
 import { Database, Markdown } from "@/types";
 
-import { restoreImg } from "@/util/restore-img";
+import remarkAddEmptyTitle from "@/plugins/rehype-codeblock-with-figure";
+
+import removeExcludedTags from "@/util/remove-excluded-tags";
 
 import styles from "@/styles/post/post.module.scss";
-import remarkAddEmptyTitle from "@/plugins/rehype-codeblock-with-figure";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const dictionary: { [key: string]: Markdown } = db.dictionary;
+  return {
+    title: dictionary[id].title,
+  };
+}
 
 const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -62,14 +77,14 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   let { value } = await remark()
     .use(remarkGfm)
     .use(remarkAddEmptyTitle)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(GetCode)
     .use(rehypePrettyCode)
     .use(AddCopyButton)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true }) // HTML 직렬화
     .process(file);
 
-  value = restoreImg(value);
+  value = removeExcludedTags(value);
 
   return (
     <>
@@ -93,11 +108,17 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
       <h1 className="text-4xl font-extrabold tracking-tight">{title}</h1>
       <p className="text-sm text-muted-foreground">{dateString(created)}</p>
       <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex w-max space-x-2 py-2">
+        <div className="flex w-max space-x-2 py-2 px-1">
           {tags.map((tag, index) => (
-            <Badge className="rounded-full" key={index}>
+            <Link
+              className={`${badgeVariants({
+                variant: "default",
+              })} rounded-full ${styles["tag"]}`}
+              href={`/?tag=${tag}`}
+              key={index}
+            >
               {tag}
-            </Badge>
+            </Link>
           ))}
         </div>
         <ScrollBar orientation="horizontal" />

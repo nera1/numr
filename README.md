@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![sumr](/public/images/1/2.png)
 
-## Getting Started
+## Template
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```markdown
+---
+filename: filename.md
+tags:
+  - sumr
+  - notice
+category: sumr
+created: Mon, 09 Dec 2021 07:19:09 GMT
+title: Title
+preview: images/1/1.jpg
+---
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The top of the markdown file requires YAML configuration.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Enter the file name in the `filename` field.
+- Add tags to the `tags` field.
+- Specify the category in the `category` field.
+- The `created` field is optional and will automatically set the current time if omitted.
+- Write the title of the post in the `title` field.
+- If the `preview` field is not specified, the icon of the corresponding category will be used as a substitute.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Image
 
-## Learn More
+```markdown
+<img src="/images/1/1.svg" width="100%" alt="image"/>
+![sumr](/images/1/1.svg)
+```
 
-To learn more about Next.js, take a look at the following resources:
+Both the `<img>` HTML tag and Markdown image syntax are supported.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Search
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Click on the tag buttons within a post to search for posts with the same tag.
+- Select a category to view posts under that category.
+- Use the search bar in the header to search for post titles.
+- Sorting results in ascending or descending order is supported for all searches.

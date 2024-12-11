@@ -18,6 +18,7 @@ import db from "@/data/db.json";
 import { debounce } from "@/util";
 
 import styles from "@/styles/index.module.scss";
+import { Markdown } from "@/types";
 
 export type PostState = {
   order?: string | null;
@@ -72,13 +73,20 @@ function Home() {
 
   useEffect(() => {
     setPostListState((prev) => {
-      const { offset, category, order, search } = prev;
+      const { offset, category, order, search, tag } = prev;
 
       let filteredPosts = [...db.titles];
+      const dictionary: { [key: string]: Markdown } = db.dictionary;
 
       if (search) {
         filteredPosts = filteredPosts.filter((post) =>
           post.title.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+
+      if (tag) {
+        filteredPosts = filteredPosts.filter((post) =>
+          dictionary[post.id].tags.includes(tag)
         );
       }
 
@@ -112,15 +120,22 @@ function Home() {
 
   function fetchData() {
     setPostListState((prev) => {
-      const { order, limit, list, category, search } = prev;
+      const { order, limit, list, category, search, tag } = prev;
       const currentListLength = list.length;
 
       // 데이터 필터링
       let filteredPosts = [...db.titles];
+      const dictionary: { [key: string]: Markdown } = db.dictionary;
 
       if (search) {
         filteredPosts = filteredPosts.filter((post) =>
           post.title.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+
+      if (tag) {
+        filteredPosts = filteredPosts.filter((post) =>
+          dictionary[post.id].tags.includes(tag)
         );
       }
 
@@ -173,6 +188,11 @@ function Home() {
   return (
     <>
       <div className={styles["keyword-container"]}>
+        {postListState.tag && (
+          <div className="text-2xl font-extrabold tracking-tight py-3">
+            {`"${postListState.tag}" 태그 검색결과`}
+          </div>
+        )}
         {postListState.search && (
           <div className="text-2xl font-extrabold tracking-tight py-3">
             {`"${postListState.search}" 검색결과`}

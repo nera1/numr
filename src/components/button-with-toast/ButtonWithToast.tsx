@@ -11,7 +11,7 @@ const ButtonWithToast = () => {
       className="hidden"
       onClick={() =>
         toast("코드가 복사되었습니다", {
-          description: "Sunday, December 03, 2023 at 9:00 AM",
+          description: "필요한 곳에 붙여넣기 해주세요",
         })
       }
     ></Button>
