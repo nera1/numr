@@ -85,13 +85,11 @@ function Home() {
         filteredPosts = filteredPosts.filter((post) =>
           dictionary[post.id].tags.includes(tag)
         );
-      }
-      if (category) {
+      } else if (category) {
         filteredPosts = filteredPosts.filter(
           (post) => post.category === category
         );
-      }
-      if (search) {
+      } else if (search) {
         filteredPosts = filteredPosts.filter((post) =>
           post.title.toLowerCase().includes(search.toLowerCase())
         );
@@ -132,13 +130,11 @@ function Home() {
         filteredPosts = filteredPosts.filter((post) =>
           dictionary[post.id].tags.includes(tag)
         );
-      }
-      if (category) {
+      } else if (category) {
         filteredPosts = filteredPosts.filter(
           (post) => post.category === category
         );
-      }
-      if (search) {
+      } else if (search) {
         filteredPosts = filteredPosts.filter((post) =>
           post.title.toLowerCase().includes(search.toLowerCase())
         );
