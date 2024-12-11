@@ -90,7 +90,7 @@ const CategorySelect: FunctionComponent = () => {
                   }}
                 >
                   <Avatar className="w-5 h-5">
-                    <AvatarImage src={`/icons/${framework.icon}`} />
+                    <AvatarImage src={`icons/${framework.icon}`} />
                     <AvatarFallback>??</AvatarFallback>
                   </Avatar>
                   {framework.label}
