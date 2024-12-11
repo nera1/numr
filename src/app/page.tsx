@@ -5,8 +5,8 @@ import { Suspense, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Spinner } from "@/components/ui/spinner";
-// import CategorySelect from "@/components/category-select/category-select";
-// import OrderSelect from "@/components/order-select/order-select";
+import CategorySelect from "@/components/category-select/category-select";
+import OrderSelect from "@/components/order-select/order-select";
 import PostListItem from "@/components/post-list-item/post-list-item";
 
 import { PostListItem as PostListItemProps } from "@/types/post-list-item";
@@ -187,8 +187,8 @@ function Home() {
         )}
       </div>
       <div className={styles["options-container"]}>
-        {/* <CategorySelect />
-        <OrderSelect /> */}
+        <CategorySelect />
+        <OrderSelect />
       </div>
       <ul className={styles["post-list"]}>
         <InfiniteScroll
