@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  basePath: "/numr",
+  assetPrefix: "/numr",
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
@@ -16,11 +18,6 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
-
-  webpack: (config) => {
-    config.output.chunkLoadTimeout = 60000;
-    return config;
-  },
 };
 
 export default nextConfig;
