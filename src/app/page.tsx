@@ -38,30 +38,30 @@ function Home() {
 
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const order = searchParams.get("order");
-    const category = searchParams.get("category");
-    const search = searchParams.get("search");
-    const tag = searchParams.get("tag");
+  // useEffect(() => {
+  //   const order = searchParams.get("order");
+  //   const category = searchParams.get("category");
+  //   const search = searchParams.get("search");
+  //   const tag = searchParams.get("tag");
 
-    setPostListState((prev) => {
-      if (
-        prev.order === order &&
-        prev.category === category &&
-        prev.search === search &&
-        prev.tag === tag
-      ) {
-        return prev;
-      }
-      return {
-        ...prev,
-        order,
-        category,
-        search,
-        tag,
-      };
-    });
-  }, [searchParams]);
+  //   setPostListState((prev) => {
+  //     if (
+  //       prev.order === order &&
+  //       prev.category === category &&
+  //       prev.search === search &&
+  //       prev.tag === tag
+  //     ) {
+  //       return prev;
+  //     }
+  //     return {
+  //       ...prev,
+  //       order,
+  //       category,
+  //       search,
+  //       tag,
+  //     };
+  //   });
+  // }, [searchParams]);
 
   useEffect(() => {
     const { offset, category, order, search, tag } = postListState;
