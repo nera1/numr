@@ -1,7 +1,7 @@
 "use client";
 
-import { FunctionComponent, useState, Suspense } from "react";
-//import { useSearchParams, useRouter } from "next/navigation";
+import { FunctionComponent, useEffect, useState, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,25 +39,25 @@ const CategorySelect: FunctionComponent = () => {
     icon: icons[key] || icons["default"],
   }));
 
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
-  // useEffect(() => {
-  //   const params = Object.fromEntries(searchParams.entries());
-  //   let updatedQueryString = "";
-  //   if (!value) {
-  //     updatedQueryString = new URLSearchParams({
-  //       order: params.order,
-  //     }).toString();
-  //   } else {
-  //     const newQueryString = { order: params.order, category: value };
-  //     updatedQueryString = new URLSearchParams(newQueryString).toString();
-  //   }
-  //   router.push(`./?${updatedQueryString}`);
-  // }, [value]);
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams.entries());
+    let updatedQueryString = "";
+    if (!value) {
+      updatedQueryString = new URLSearchParams({
+        order: params.order,
+      }).toString();
+    } else {
+      const newQueryString = { order: params.order, category: value };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    }
+    router.push(`./?${updatedQueryString}`);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
