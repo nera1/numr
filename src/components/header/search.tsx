@@ -15,7 +15,7 @@ const Search: FunctionComponent = () => {
       console.log(url);
       setTimeout(() => {
         router.push(url);
-      }, 50);
+      }, 4000);
     }
   };
 
