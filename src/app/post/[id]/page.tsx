@@ -43,16 +43,10 @@ import removeExcludedTags from "@/util/remove-excluded-tags";
 
 import styles from "@/styles/post/post.module.scss";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const dictionary: { [key: string]: Markdown } = db.dictionary;
-  return {
-    title: dictionary[id].title,
-  };
+export async function generateStaticParams() {
+  const dictionary = db.dictionary;
+  const ids = Object.keys(dictionary);
+  return ids.map((id) => ({ id }));
 }
 
 const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
