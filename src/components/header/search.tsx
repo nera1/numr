@@ -9,13 +9,10 @@ const Search: FunctionComponent = () => {
   const [input, setInput] = useState<string>("");
   const router = useRouter();
 
-  useEffect(() => {
-    console.log("HERE");
-  }, []);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
       const url = `/?search=${encodeURIComponent(input)}`;
+      console.log(url);
       router.push(url);
     }
   };
@@ -38,9 +35,5 @@ const Search: FunctionComponent = () => {
 };
 
 export default function SearchComponent() {
-  return (
-    <Suspense>
-      <Search />
-    </Suspense>
-  );
+  return <Search />;
 }
