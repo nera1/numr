@@ -79,17 +79,17 @@ function Home() {
       let filteredPosts = [...db.titles];
       const dictionary: { [key: string]: Markdown } = db.dictionary;
 
-      if (search) {
-        filteredPosts = filteredPosts.filter((post) =>
-          post.title.toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (tag) {
+      if (tag) {
         filteredPosts = filteredPosts.filter((post) =>
           dictionary[post.id].tags.includes(tag)
         );
       } else if (category) {
         filteredPosts = filteredPosts.filter(
           (post) => post.category === category
+        );
+      } else if (search) {
+        filteredPosts = filteredPosts.filter((post) =>
+          post.title.toLowerCase().includes(search.toLowerCase())
         );
       }
 
@@ -124,17 +124,17 @@ function Home() {
       let filteredPosts = [...db.titles];
       const dictionary: { [key: string]: Markdown } = db.dictionary;
 
-      if (search) {
-        filteredPosts = filteredPosts.filter((post) =>
-          post.title.toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (tag) {
+      if (tag) {
         filteredPosts = filteredPosts.filter((post) =>
           dictionary[post.id].tags.includes(tag)
         );
       } else if (category) {
         filteredPosts = filteredPosts.filter(
           (post) => post.category === category
+        );
+      } else if (search) {
+        filteredPosts = filteredPosts.filter((post) =>
+          post.title.toLowerCase().includes(search.toLowerCase())
         );
       }
 
