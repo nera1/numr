@@ -1,27 +1,42 @@
 "use client";
 
-import { FunctionComponent, Suspense, useState } from "react";
+import {
+  FunctionComponent,
+  RefObject,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Search as SearchIcon } from "lucide-react";
+import Link from "next/link";
 
 const Search: FunctionComponent = () => {
   const [input, setInput] = useState<string>("");
-  const router = useRouter();
+  const [dynamicLink, setDynamicLink] = useState<string>("");
+  const linkRef: RefObject<HTMLAnchorElement> = useRef(null);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
       const url = `/?search=${encodeURIComponent(input)}`;
-      console.log(url);
-      router.push(url);
+      setDynamicLink(url);
       setTimeout(() => {
         setInput("");
-      }, 10);
+      }, 5);
     }
   };
 
+  useEffect(() => {
+    if (dynamicLink) {
+      linkRef.current?.click();
+    }
+  }, [dynamicLink]);
+
   return (
     <div className="px-3 flex items-center border border-input rounded-md p-1 bg-background h-9">
+      <Link className="hidden" href={dynamicLink} ref={linkRef}></Link>
       <SearchIcon size={16} />
       <Input
         type="text"
