@@ -108,7 +108,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
               className={`${badgeVariants({
                 variant: "default",
               })} rounded-full ${styles["tag"]}`}
-              href={`/?tag=${tag}`}
+              href={`?tag=${tag}`}
               key={index}
             >
               {tag}
