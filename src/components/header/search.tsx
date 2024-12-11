@@ -19,7 +19,7 @@ const Search: FunctionComponent = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && input.trim()) {
-      const url = `/?search=${encodeURIComponent(input)}`;
+      const url = `../?search=${encodeURIComponent(input)}`;
       setDynamicLink(url);
       setTimeout(() => {
         setInput("");
