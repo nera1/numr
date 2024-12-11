@@ -1,12 +1,12 @@
 "use client";
 
-import { Suspense, useState } from "react";
-//import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Spinner } from "@/components/ui/spinner";
-import CategorySelect from "@/components/category-select/category-select";
-import OrderSelect from "@/components/order-select/order-select";
+// import CategorySelect from "@/components/category-select/category-select";
+// import OrderSelect from "@/components/order-select/order-select";
 import PostListItem from "@/components/post-list-item/post-list-item";
 
 import { PostListItem as PostListItemProps } from "@/types/post-list-item";
@@ -36,80 +36,80 @@ function Home() {
     isEnd: false,
   });
 
-  //const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-  // useEffect(() => {
-  //   const order = searchParams.get("order");
-  //   const category = searchParams.get("category");
-  //   const search = searchParams.get("search");
-  //   const tag = searchParams.get("tag");
+  useEffect(() => {
+    const order = searchParams.get("order");
+    const category = searchParams.get("category");
+    const search = searchParams.get("search");
+    const tag = searchParams.get("tag");
 
-  //   setPostListState((prev) => {
-  //     if (
-  //       prev.order === order &&
-  //       prev.category === category &&
-  //       prev.search === search &&
-  //       prev.tag === tag
-  //     ) {
-  //       return prev;
-  //     }
-  //     return {
-  //       ...prev,
-  //       order,
-  //       category,
-  //       search,
-  //       tag,
-  //     };
-  //   });
-  // }, [searchParams]);
+    setPostListState((prev) => {
+      if (
+        prev.order === order &&
+        prev.category === category &&
+        prev.search === search &&
+        prev.tag === tag
+      ) {
+        return prev;
+      }
+      return {
+        ...prev,
+        order,
+        category,
+        search,
+        tag,
+      };
+    });
+  }, [searchParams]);
 
-  // useEffect(() => {
-  //   const { offset, category, order, search, tag } = postListState;
+  useEffect(() => {
+    const { offset, category, order, search, tag } = postListState;
 
-  //   let filteredPosts = [...db.titles];
-  //   const dictionary: { [key: string]: Markdown } = db.dictionary;
+    let filteredPosts = [...db.titles];
+    const dictionary: { [key: string]: Markdown } = db.dictionary;
 
-  //   if (tag) {
-  //     filteredPosts = filteredPosts.filter((post) =>
-  //       dictionary[post.id].tags.includes(tag)
-  //     );
-  //   }
-  //   if (category) {
-  //     filteredPosts = filteredPosts.filter(
-  //       (post) => post.category === category
-  //     );
-  //   }
-  //   if (search) {
-  //     filteredPosts = filteredPosts.filter((post) =>
-  //       post.title.toLowerCase().includes(search.toLowerCase())
-  //     );
-  //   }
+    if (tag) {
+      filteredPosts = filteredPosts.filter((post) =>
+        dictionary[post.id].tags.includes(tag)
+      );
+    }
+    if (category) {
+      filteredPosts = filteredPosts.filter(
+        (post) => post.category === category
+      );
+    }
+    if (search) {
+      filteredPosts = filteredPosts.filter((post) =>
+        post.title.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
-  //   let newList = [];
-  //   switch (order) {
-  //     case "latest":
-  //       newList = filteredPosts.reverse().slice(0, offset);
-  //       break;
-  //     case "oldest":
-  //       newList = filteredPosts.slice(0, offset);
-  //       break;
-  //     default:
-  //       newList = filteredPosts.reverse().slice(0, offset);
-  //       break;
-  //   }
+    let newList = [];
+    switch (order) {
+      case "latest":
+        newList = filteredPosts.reverse().slice(0, offset);
+        break;
+      case "oldest":
+        newList = filteredPosts.slice(0, offset);
+        break;
+      default:
+        newList = filteredPosts.reverse().slice(0, offset);
+        break;
+    }
 
-  //   setPostListState((prev) => ({
-  //     ...prev,
-  //     list: newList,
-  //     isEnd: newList.length >= filteredPosts.length,
-  //   }));
-  // }, [
-  //   postListState.offset,
-  //   postListState.category,
-  //   postListState.order,
-  //   postListState.search,
-  //   postListState.tag,
-  // ]);
+    setPostListState((prev) => ({
+      ...prev,
+      list: newList,
+      isEnd: newList.length >= filteredPosts.length,
+    }));
+  }, [
+    postListState.offset,
+    postListState.category,
+    postListState.order,
+    postListState.search,
+    postListState.tag,
+  ]);
 
   function fetchData() {
     setPostListState((prev) => {
@@ -187,8 +187,8 @@ function Home() {
         )}
       </div>
       <div className={styles["options-container"]}>
-        <CategorySelect />
-        <OrderSelect />
+        {/* <CategorySelect />
+        <OrderSelect /> */}
       </div>
       <ul className={styles["post-list"]}>
         <InfiniteScroll
