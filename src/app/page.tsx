@@ -63,6 +63,8 @@ function Home() {
     const search = searchParams.get("search");
     const tag = searchParams.get("tag");
 
+    console.log(order, category, search, tag);
+
     setPostListState((prev) => ({
       ...prev,
       order,
