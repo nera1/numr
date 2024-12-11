@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, Suspense, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Search as SearchIcon } from "lucide-react";
