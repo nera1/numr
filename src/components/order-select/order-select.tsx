@@ -180,7 +180,9 @@ const OrderSelect: FunctionComponent = () => {
   const searchParams = useSearchParams();
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(orders[0].value);
+  const [value, setValue] = useState<string | null>(
+    searchParams.get("order") || orders[0].value
+  );
   const initialLoad = useRef(true); // Ref to track initial load
 
   useEffect(() => {
@@ -188,17 +190,16 @@ const OrderSelect: FunctionComponent = () => {
       initialLoad.current = false; // Skip the first effect call
       return;
     }
+
+    // Update the query string when the value changes
     const params = Object.fromEntries(searchParams.entries());
-    let updatedQueryString = "";
-    if (!value) {
-      const { order: _, ...others } = params; //eslint-disable-line no-unused-vars
-      console.log(_);
-      const newQueryString = { ...others };
-      updatedQueryString = new URLSearchParams(newQueryString).toString();
-    } else {
-      const newQueryString = { ...params, order: value };
-      updatedQueryString = new URLSearchParams(newQueryString).toString();
-    }
+    const newQueryString = value
+      ? { ...params, order: value }
+      : Object.keys(params)
+          .filter((key) => key !== "order")
+          .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
+
+    const updatedQueryString = new URLSearchParams(newQueryString).toString();
     router.push(
       `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${
         updatedQueryString ? `?${updatedQueryString}` : ""
@@ -230,7 +231,7 @@ const OrderSelect: FunctionComponent = () => {
                   key={order.value}
                   value={order.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    setValue(currentValue === value ? null : currentValue);
                     setOpen(false);
                   }}
                 >
