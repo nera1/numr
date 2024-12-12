@@ -1,7 +1,7 @@
 "use client";
 
 import { FunctionComponent, useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -40,7 +40,7 @@ const CategorySelect: FunctionComponent = () => {
   }));
 
   const searchParams = useSearchParams();
-  //const router = useRouter();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -57,7 +57,7 @@ const CategorySelect: FunctionComponent = () => {
       const newQueryString = { ...params, category: value };
       updatedQueryString = new URLSearchParams(newQueryString).toString();
     }
-    console.log(updatedQueryString);
+    router.push(`/${updatedQueryString}`);
   }, [value, searchParams]);
 
   return (
