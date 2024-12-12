@@ -1,7 +1,7 @@
 "use client";
 
 import { FunctionComponent, useEffect, useState, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+// import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,26 +39,27 @@ const CategorySelect: FunctionComponent = () => {
     icon: icons[key] || icons["default"],
   }));
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    const params = Object.fromEntries(searchParams.entries());
-    let updatedQueryString = "";
-    if (!value) {
-      const { category: _, ...others } = params; //eslint-disable-line no-unused-vars
-      const newQueryString = { ...others };
-      console.log(_);
-      updatedQueryString = new URLSearchParams(newQueryString).toString();
-    } else {
-      const newQueryString = { ...params, category: value };
-      updatedQueryString = new URLSearchParams(newQueryString).toString();
-    }
-    console.log(updatedQueryString);
-    router.push(`/numr/?${updatedQueryString}`);
+    console.log(value);
+    // const params = Object.fromEntries(searchParams.entries());
+    // let updatedQueryString = "";
+    // if (!value) {
+    //   const { category: _, ...others } = params; //eslint-disable-line no-unused-vars
+    //   const newQueryString = { ...others };
+    //   console.log(_);
+    //   updatedQueryString = new URLSearchParams(newQueryString).toString();
+    // } else {
+    //   const newQueryString = { ...params, category: value };
+    //   updatedQueryString = new URLSearchParams(newQueryString).toString();
+    // }
+    // console.log(updatedQueryString);
+    // router.push(`/numr/?${updatedQueryString}`);
   }, [value]);
 
   return (
