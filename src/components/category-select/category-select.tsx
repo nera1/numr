@@ -1,7 +1,7 @@
 "use client";
 
 import { FunctionComponent, useEffect, useState, Suspense } from "react";
-// import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,27 +39,30 @@ const CategorySelect: FunctionComponent = () => {
     icon: icons[key] || icons["default"],
   }));
 
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    // const params = Object.fromEntries(searchParams.entries());
-    // let updatedQueryString = "";
-    // if (!value) {
-    //   const { category: _, ...others } = params; //eslint-disable-line no-unused-vars
-    //   const newQueryString = { ...others };
-    //   console.log(_);
-    //   updatedQueryString = new URLSearchParams(newQueryString).toString();
-    // } else {
-    //   const newQueryString = { ...params, category: value };
-    //   updatedQueryString = new URLSearchParams(newQueryString).toString();
-    // }
-    // console.log(updatedQueryString);
-    // router.push(`/numr/?${updatedQueryString}`);
-  }, [value]);
+    const params = Object.fromEntries(searchParams.entries());
+
+    // Update the query string with the new category value
+    const updatedQueryString = value
+      ? { ...params, category: value } // Add or update the "category" parameter
+      : Object.keys(params) // Remove "category" if value is empty
+          .filter((key) => key !== "category")
+          .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
+
+    const queryString = new URLSearchParams(updatedQueryString).toString();
+
+    router.push(
+      `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${
+        queryString ? `/?${queryString}` : "/"
+      }`
+    );
+  }, [value, searchParams]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
