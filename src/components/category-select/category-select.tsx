@@ -59,7 +59,7 @@ const CategorySelect: FunctionComponent = () => {
     }
     console.log(updatedQueryString);
     router.push(`/?${updatedQueryString}`);
-  }, [value, searchParams]);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
