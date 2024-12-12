@@ -53,6 +53,18 @@ preview: images/1/1.svg
   <img src="./../images/1/1.svg" width="50%" alt="image"/>
 </p>
 
+<p style="display:flex;justify-content:center">
+  <img src="../../images/1/1.svg" width="50%" alt="image"/>
+</p>
+
+<p style="display:flex;justify-content:center">
+  <img src="/../../images/1/1.svg" width="50%" alt="image"/>
+</p>
+
+<p style="display:flex;justify-content:center">
+  <img src="./../../images/1/1.svg" width="50%" alt="image"/>
+</p>
+
 ![pool](/images/1/1.svg)
 
 ```Markdown title="Image"
