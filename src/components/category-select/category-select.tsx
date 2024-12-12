@@ -44,24 +44,12 @@ const CategorySelect: FunctionComponent = () => {
   const [value, setValue] = useState(searchParams.get("category") || ""); // 초기값 동기화
 
   useEffect(() => {
-    if (value === "") return; // 빈 값일 때 실행하지 않음
+    if (!value) return; // 값이 없으면 실행하지 않음
 
-    const params = Object.fromEntries(searchParams.entries());
+    const queryString = new URLSearchParams({ category: value }).toString();
 
-    const updatedQueryString = value
-      ? { ...params, category: value }
-      : Object.keys(params)
-          .filter((key) => key !== "category")
-          .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
-
-    const queryString = new URLSearchParams(updatedQueryString).toString();
-
-    router.push(
-      `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${
-        queryString ? `/?${queryString}` : "/"
-      }`
-    );
-  }, [value]); // searchParams 제거
+    router.push(`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/?${queryString}`);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
