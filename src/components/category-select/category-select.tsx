@@ -46,7 +46,6 @@ const CategorySelect: FunctionComponent = () => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    console.log(value);
     // const params = Object.fromEntries(searchParams.entries());
     // let updatedQueryString = "";
     // if (!value) {
