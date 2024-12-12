@@ -63,7 +63,7 @@ const OrderSelect: FunctionComponent = () => {
     //   updatedQueryString = new URLSearchParams(newQueryString).toString();
     // }
     //router.push(`?${updatedQueryString}`);
-    router.push(`/numr/${value ? `?category=${value}` : ""}`);
+    router.push(`/numr/${value ? `?order=${value}` : ""}`);
   }, [value]);
 
   return (
