@@ -66,20 +66,21 @@ const OrderSelect: FunctionComponent = () => {
     }
 
     const params = Object.fromEntries(searchParams.entries());
+
+    // Create updated query string
     const updatedQueryString = value
-      ? { ...params, order: value }
-      : Object.keys(params)
+      ? { ...params, order: value } // Add or update the "order" parameter
+      : Object.keys(params) // Remove "order" parameter if value is null
           .filter((key) => key !== "order")
           .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
 
-    // Push the updated query string
     const queryString = new URLSearchParams(updatedQueryString).toString();
-    router.push(
-      `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${
-        queryString ? `/?${queryString}` : "/"
-      }`
-    );
-  }, [value]);
+
+    // Add basePath explicitly for GitHub Pages compatibility
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+    router.push(`${basePath}${queryString ? `/?${queryString}` : "/"}`);
+  }, [value, searchParams]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
