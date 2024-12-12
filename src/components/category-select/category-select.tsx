@@ -57,7 +57,11 @@ const CategorySelect: FunctionComponent = () => {
       const newQueryString = { ...params, category: value };
       updatedQueryString = new URLSearchParams(newQueryString).toString();
     }
-    router.push(`/?${updatedQueryString}`);
+    router.push(
+      `${
+        process.env.NODE_ENV === "production" ? "/numr" : ""
+      }/?${updatedQueryString}`
+    );
   }, [value, searchParams]);
 
   return (
