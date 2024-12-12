@@ -133,7 +133,7 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -177,6 +177,7 @@ const OrderSelect: FunctionComponent = () => {
   ];
 
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(orders[0].value);
@@ -187,10 +188,20 @@ const OrderSelect: FunctionComponent = () => {
       initialLoad.current = false; // Skip the first effect call
       return;
     }
-
+    const params = Object.fromEntries(searchParams.entries());
+    let updatedQueryString = "";
+    if (!value) {
+      const { order: _, ...others } = params; //eslint-disable-line no-unused-vars
+      console.log(_);
+      const newQueryString = { ...others };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    } else {
+      const newQueryString = { ...params, order: value };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    }
     router.push(
       `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${
-        value ? `?order=${value}` : ""
+        updatedQueryString ? `?${updatedQueryString}` : ""
       }`
     );
   }, [value]);
