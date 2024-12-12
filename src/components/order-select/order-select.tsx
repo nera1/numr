@@ -55,18 +55,16 @@ const OrderSelect: FunctionComponent = () => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string | null>(
-    searchParams.get("order") || orders[0].value
+    searchParams.get("order") || null
   );
   const initialLoad = useRef(true); // Ref to track initial load
 
   useEffect(() => {
-    // Execute logic only when `value` changes after the first load
     if (initialLoad.current) {
-      initialLoad.current = false; // Mark initial load as complete
+      initialLoad.current = false; // Skip the first effect call
       return;
     }
 
-    // Get current search parameters
     const params = Object.fromEntries(searchParams.entries());
     const updatedQueryString = value
       ? { ...params, order: value }
@@ -74,15 +72,14 @@ const OrderSelect: FunctionComponent = () => {
           .filter((key) => key !== "order")
           .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
 
-    // Update the URL
+    // Push the updated query string
+    const queryString = new URLSearchParams(updatedQueryString).toString();
     router.push(
-      `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${
-        new URLSearchParams(updatedQueryString).toString()
-          ? `?${new URLSearchParams(updatedQueryString).toString()}`
-          : ""
+      `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${
+        queryString ? `/?${queryString}` : "/"
       }`
     );
-  }, [value, searchParams]); // Add `searchParams` as a dependency
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
