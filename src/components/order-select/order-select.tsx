@@ -62,11 +62,7 @@ const OrderSelect: FunctionComponent = () => {
       const newQueryString = { ...params, order: value };
       updatedQueryString = new URLSearchParams(newQueryString).toString();
     }
-    router.push(
-      `${
-        process.env.NODE_ENV === "production" ? "/numr" : ""
-      }/?${updatedQueryString}`
-    );
+    console.log(updatedQueryString);
   }, [value]);
 
   return (
