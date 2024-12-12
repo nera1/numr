@@ -49,15 +49,16 @@ const CategorySelect: FunctionComponent = () => {
     const params = Object.fromEntries(searchParams.entries());
     let updatedQueryString = "";
     if (!value) {
-      updatedQueryString = new URLSearchParams({
-        order: params.order,
-      }).toString();
+      const { category: _, ...others } = params; //eslint-disable-line no-unused-vars
+      const newQueryString = { ...others };
+      console.log(_);
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
     } else {
-      const newQueryString = { order: params.order, category: value };
+      const newQueryString = { ...params, category: value };
       updatedQueryString = new URLSearchParams(newQueryString).toString();
     }
-    router.push(`./?${updatedQueryString}`);
-  }, [value]);
+    router.push(`/?${updatedQueryString}`);
+  }, [value, searchParams]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

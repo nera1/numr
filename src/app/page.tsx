@@ -10,9 +10,9 @@ import OrderSelect from "@/components/order-select/order-select";
 import PostListItem from "@/components/post-list-item/post-list-item";
 
 import { PostListItem as PostListItemProps } from "@/types/post-list-item";
-import db from "@/data/db.json";
-import { debounce } from "@/util";
-import { Markdown } from "@/types";
+// import db from "@/data/db.json";
+// import { debounce } from "@/util";
+// import { Markdown } from "@/types";
 import styles from "@/styles/index.module.scss";
 
 export type PostState = {
@@ -28,7 +28,7 @@ export type PostState = {
 
 function Home() {
   const [postListState, setPostListState] = useState<PostState>({
-    order: "latest",
+    order: null,
     limit: 6,
     offset: 12,
     category: null,
@@ -43,7 +43,6 @@ function Home() {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
     const tag = searchParams.get("tag");
-
     setPostListState((prev) => {
       if (
         prev.order === order &&
@@ -64,45 +63,41 @@ function Home() {
   }, [searchParams]);
 
   useEffect(() => {
-    const { offset, category, order, search, tag } = postListState;
-
-    let filteredPosts = [...db.titles];
-    const dictionary: { [key: string]: Markdown } = db.dictionary;
-
-    if (tag) {
-      filteredPosts = filteredPosts.filter((post) =>
-        dictionary[post.id].tags.includes(tag)
-      );
-    }
-    if (category) {
-      filteredPosts = filteredPosts.filter(
-        (post) => post.category === category
-      );
-    }
-    if (search) {
-      filteredPosts = filteredPosts.filter((post) =>
-        post.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    let newList = [];
-    switch (order) {
-      case "latest":
-        newList = filteredPosts.reverse().slice(0, offset);
-        break;
-      case "oldest":
-        newList = filteredPosts.slice(0, offset);
-        break;
-      default:
-        newList = filteredPosts.reverse().slice(0, offset);
-        break;
-    }
-
-    setPostListState((prev) => ({
-      ...prev,
-      list: newList,
-      isEnd: newList.length >= filteredPosts.length,
-    }));
+    // const { offset, category, order, search, tag } = postListState;
+    // let filteredPosts = [...db.titles];
+    // const dictionary: { [key: string]: Markdown } = db.dictionary;
+    // if (tag) {
+    //   filteredPosts = filteredPosts.filter((post) =>
+    //     dictionary[post.id].tags.includes(tag)
+    //   );
+    // }
+    // if (category) {
+    //   filteredPosts = filteredPosts.filter(
+    //     (post) => post.category === category
+    //   );
+    // }
+    // if (search) {
+    //   filteredPosts = filteredPosts.filter((post) =>
+    //     post.title.toLowerCase().includes(search.toLowerCase())
+    //   );
+    // }
+    // let newList = [];
+    // switch (order) {
+    //   case "latest":
+    //     newList = filteredPosts.reverse().slice(0, offset);
+    //     break;
+    //   case "oldest":
+    //     newList = filteredPosts.slice(0, offset);
+    //     break;
+    //   default:
+    //     newList = filteredPosts.reverse().slice(0, offset);
+    //     break;
+    // }
+    // setPostListState((prev) => ({
+    //   ...prev,
+    //   list: newList,
+    //   isEnd: newList.length >= filteredPosts.length,
+    // }));
   }, [
     postListState.offset,
     postListState.category,
@@ -111,64 +106,64 @@ function Home() {
     postListState.tag,
   ]);
 
-  function fetchData() {
-    setPostListState((prev) => {
-      const { order, limit, list, category, search, tag } = prev;
-      const currentListLength = list.length;
+  // function fetchData() {
+  //   setPostListState((prev) => {
+  //     const { order, limit, list, category, search, tag } = prev;
+  //     const currentListLength = list.length;
 
-      let filteredPosts = [...db.titles];
-      const dictionary: { [key: string]: Markdown } = db.dictionary;
+  //     let filteredPosts = [...db.titles];
+  //     const dictionary: { [key: string]: Markdown } = db.dictionary;
 
-      if (tag) {
-        filteredPosts = filteredPosts.filter((post) =>
-          dictionary[post.id].tags.includes(tag)
-        );
-      }
-      if (category) {
-        filteredPosts = filteredPosts.filter(
-          (post) => post.category === category
-        );
-      }
-      if (search) {
-        filteredPosts = filteredPosts.filter((post) =>
-          post.title.toLowerCase().includes(search.toLowerCase())
-        );
-      }
+  //     if (tag) {
+  //       filteredPosts = filteredPosts.filter((post) =>
+  //         dictionary[post.id].tags.includes(tag)
+  //       );
+  //     }
+  //     if (category) {
+  //       filteredPosts = filteredPosts.filter(
+  //         (post) => post.category === category
+  //       );
+  //     }
+  //     if (search) {
+  //       filteredPosts = filteredPosts.filter((post) =>
+  //         post.title.toLowerCase().includes(search.toLowerCase())
+  //       );
+  //     }
 
-      let newPosts = [];
-      switch (order) {
-        case "latest":
-          newPosts = filteredPosts
-            .reverse()
-            .slice(currentListLength, currentListLength + limit);
-          break;
-        case "oldest":
-          newPosts = filteredPosts.slice(
-            currentListLength,
-            currentListLength + limit
-          );
-          break;
-        default:
-          newPosts = filteredPosts
-            .reverse()
-            .slice(currentListLength, currentListLength + limit);
-          break;
-      }
+  //     let newPosts = [];
+  //     switch (order) {
+  //       case "latest":
+  //         newPosts = filteredPosts
+  //           .reverse()
+  //           .slice(currentListLength, currentListLength + limit);
+  //         break;
+  //       case "oldest":
+  //         newPosts = filteredPosts.slice(
+  //           currentListLength,
+  //           currentListLength + limit
+  //         );
+  //         break;
+  //       default:
+  //         newPosts = filteredPosts
+  //           .reverse()
+  //           .slice(currentListLength, currentListLength + limit);
+  //         break;
+  //     }
 
-      const newList = [...list, ...newPosts];
+  //     const newList = [...list, ...newPosts];
 
-      return {
-        ...prev,
-        list: newList,
-        isEnd: newList.length >= filteredPosts.length || newPosts.length === 0,
-      };
-    });
-  }
+  //     return {
+  //       ...prev,
+  //       list: newList,
+  //       isEnd: newList.length >= filteredPosts.length || newPosts.length === 0,
+  //     };
+  //   });
+  // }
 
-  const debouncer = debounce(fetchData, 550);
+  // const debouncer = debounce(fetchData, 550);
 
   function next() {
-    debouncer();
+    //debouncer();
   }
 
   return (

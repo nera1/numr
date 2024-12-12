@@ -1,7 +1,7 @@
 "use client";
 
-import { FunctionComponent, useState, Suspense } from "react";
-//import { useSearchParams, useRouter } from "next/navigation";
+import { FunctionComponent, useState, Suspense, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -44,23 +44,26 @@ const OrderSelect: FunctionComponent = () => {
     { value: "oldest", label: "Oldest" },
   ];
 
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(orders[0].value);
 
-  // useEffect(() => {
-  //   const params = Object.fromEntries(searchParams.entries());
-  //   let updatedQueryString = "";
-  //   if (!value) {
-  //     updatedQueryString = new URLSearchParams(params).toString();
-  //   } else {
-  //     const newQueryString = { ...params, order: value };
-  //     updatedQueryString = new URLSearchParams(newQueryString).toString();
-  //   }
-  //   router.push(`/?${updatedQueryString}`);
-  // }, [value]);
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams.entries());
+    let updatedQueryString = "";
+    if (!value) {
+      const { order: _, ...others } = params; //eslint-disable-line no-unused-vars
+      console.log(_);
+      const newQueryString = { ...others };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    } else {
+      const newQueryString = { ...params, order: value };
+      updatedQueryString = new URLSearchParams(newQueryString).toString();
+    }
+    router.push(`/?${updatedQueryString}`);
+  }, [value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
