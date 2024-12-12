@@ -30,17 +30,17 @@ preview: images/1/1.svg
 ## Image
 
 <p style="display:flex;justify-content:center">
-  <img src="/images/1/1.svg" width="50%" alt="image"/>
+  <img src="../images/1/1.svg" width="50%" alt="image"/>
 </p>
 
-![pool](/images/1/1.svg)
+![pool](../images/1/1.svg)
 
 ```Markdown title="Image"
 <p style="display:flex;justify-content:center">
   <img src="../images/1/1.svg" width="50%" alt="image"/>
 </p>
 
-![pool](/images/1/1.svg)
+![pool](../images/1/1.svg)
 ```
 
 ## 코드블럭
