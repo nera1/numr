@@ -3,9 +3,7 @@
 import { FunctionComponent, useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import {
@@ -43,9 +41,11 @@ const CategorySelect: FunctionComponent = () => {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(searchParams.get("category") || ""); // 초기값 동기화
 
   useEffect(() => {
+    if (value === "") return; // 빈 값일 때 실행하지 않음
+
     const params = Object.fromEntries(searchParams.entries());
 
     const updatedQueryString = value
@@ -61,7 +61,7 @@ const CategorySelect: FunctionComponent = () => {
         queryString ? `/?${queryString}` : "/"
       }`
     );
-  }, [value, searchParams]);
+  }, [value]); // searchParams 제거
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -102,10 +102,9 @@ const CategorySelect: FunctionComponent = () => {
                     {framework.count}
                   </p>
                   <Check
-                    className={cn(
-                      "ml-auto",
+                    className={`ml-auto ${
                       value === framework.value ? "opacity-100" : "opacity-0"
-                    )}
+                    }`}
                   />
                 </CommandItem>
               ))}

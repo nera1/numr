@@ -1,6 +1,9 @@
 @use "../variables";
 
 .bread {
+  .category {
+    cursor: pointer;
+  }
 }
 
 .tag {

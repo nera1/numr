@@ -12,15 +12,6 @@ import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-
 import ButtonWithToast from "@/components/button-with-toast/ButtonWithToast";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -28,6 +19,7 @@ import { badgeVariants } from "@/components/ui/badge";
 
 import PostNavigator from "./post-navigator";
 import ScrollTop from "./scroll-top";
+import Bread from "./bread";
 
 import GetCode from "@/plugins/get-code";
 import AddCopyButton from "@/plugins/add-copy-button";
@@ -91,23 +83,7 @@ const Post = async function ({ params }: { params: Promise<{ id: string }> }) {
   return (
     <>
       <title>{title}</title>
-      <Breadcrumb className={`${styles["bread"]} mt-4`}>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={`/?category=${category}`}>
-              {category}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{title}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <Bread title={title} category={category} />
       <h1 className="text-4xl font-extrabold tracking-tight">{title}</h1>
       <p className="text-sm text-muted-foreground">{dateString(created)}</p>
       <ScrollArea className="w-full whitespace-nowrap">

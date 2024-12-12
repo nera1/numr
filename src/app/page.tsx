@@ -13,6 +13,7 @@ import { PostListItem as PostListItemProps } from "@/types/post-list-item";
 import db from "@/data/db.json";
 import { debounce } from "@/util";
 import { Markdown } from "@/types";
+
 import styles from "@/styles/index.module.scss";
 
 export type PostState = {
@@ -28,7 +29,7 @@ export type PostState = {
 
 function Home() {
   const [postListState, setPostListState] = useState<PostState>({
-    order: null,
+    order: "latest",
     limit: 6,
     offset: 12,
     category: null,
@@ -43,6 +44,7 @@ function Home() {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
     const tag = searchParams.get("tag");
+
     setPostListState((prev) => {
       return {
         ...prev,
