@@ -48,10 +48,9 @@ const CategorySelect: FunctionComponent = () => {
   useEffect(() => {
     const params = Object.fromEntries(searchParams.entries());
 
-    // Update the query string with the new category value
     const updatedQueryString = value
-      ? { ...params, category: value } // Add or update the "category" parameter
-      : Object.keys(params) // Remove "category" if value is empty
+      ? { ...params, category: value }
+      : Object.keys(params)
           .filter((key) => key !== "category")
           .reduce((acc, key) => ({ ...acc, [key]: params[key] }), {});
 
