@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const debug = process.env.NODE_ENV === "production";
-const repository = "numr";
+const repository = "sumr";
 
 const nextConfig: NextConfig = {
   output: "export", // Static export mode
