@@ -54,7 +54,13 @@ const HeaderMenu: FunctionComponent = () => {
               </CommandItem>
               <CommandItem className="cursor-pointer" onClick={() => {}}>
                 <GitCompareArrows />
-                <span>Repository</span>
+                <span
+                  onClick={() => {
+                    window.open("https://github.com/nera1/sumr");
+                  }}
+                >
+                  Repository
+                </span>
               </CommandItem>
               <CommandItem className="cursor-pointer">
                 <Mail />
