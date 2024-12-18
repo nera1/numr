@@ -24,8 +24,11 @@
   & * {
     color: variables.$font-default;
   }
-  & li {
+  & ul > li {
     list-style-type: disc;
+  }
+  & ol > li {
+    list-style-type: decimal;
   }
   :global(.copy-button) {
     width: 20px;
@@ -618,6 +621,7 @@
 
 .markdown table th {
   font-weight: 600;
+  background-color: variables.$black-800;
 }
 
 .markdown table th,
@@ -631,12 +635,11 @@
 }
 
 .markdown table tr {
-  background-color: variables.$black-700;
   border-top: 1px solid #21262d;
 }
 
 .markdown table tr:nth-child(2n) {
-  background-color: variables.$black-700;
+  //background-color: variables.$black-700;
 }
 
 .markdown table img {
